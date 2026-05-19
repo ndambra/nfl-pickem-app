@@ -3,12 +3,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui", "@nuxtjs/eslint-module"],
   css: ["./app/assets/css/main.css"],
-  typescript: {
-    typeCheck: true,
-  },
-  ui: {
-    fonts: false,
-  },
   vite: {
     optimizeDeps: {
       include: ["@vue/devtools-core", "@vue/devtools-kit"],
