@@ -1,8 +1,13 @@
 export default defineNuxtConfig({
   compatibilityDate: "2026-05-19",
   devtools: { enabled: true },
+  modules: ["@nuxt/ui", "@nuxtjs/eslint-module"],
+  css: ["./app/assets/css/main.css"],
   typescript: {
     typeCheck: true,
+  },
+  ui: {
+    fonts: false,
   },
   vite: {
     optimizeDeps: {

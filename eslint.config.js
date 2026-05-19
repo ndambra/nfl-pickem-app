@@ -6,18 +6,19 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
-    ignores: ["dist/**", ".nuxt/**"],
-  },
-  {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"],
     plugins: { js },
     extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser },
+    ignores: ["dist/**", ".nuxt/**"],
+    languageOptions: { globals: globals.node },
   },
   tseslint.configs.recommended,
   pluginVue.configs["flat/essential"],
   {
     files: ["**/*.vue"],
     languageOptions: { parserOptions: { parser: tseslint.parser } },
+    rules: {
+      "vue/multi-word-component-names": "off",
+    },
   },
 ]);
