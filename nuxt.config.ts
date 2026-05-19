@@ -9,6 +9,14 @@ export default defineNuxtConfig({
   ui: {
     fonts: false,
   },
+  icon: {
+    serverBundle: {
+      collections: ["lucide"],
+    },
+  },
+  eslint: {
+    lintOnStart: false,
+  },
   vite: {
     optimizeDeps: {
       include: ["@vue/devtools-core", "@vue/devtools-kit"],

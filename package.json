@@ -12,7 +12,8 @@
     "test": "vitest --run",
     "format:write": "prettier --write \"app/**/*.{vue,js,ts,json,css,md}\"",
     "format:check": "prettier --check \"app/**/*.{vue,js,ts,json,css,md}\"",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "ndambra",
@@ -23,10 +24,12 @@
     "@types/node": "^25.9.0",
     "nuxt": "^4.4.6",
     "tailwindcss": "^4.3.0",
-    "vue": "^3.5.34"
+    "vue": "^3.5.34",
+    "vue-router": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@iconify-json/lucide": "^1.2.108",
     "@nuxtjs/eslint-module": "^4.1.0",
     "eslint": "^10.4.0",
     "eslint-plugin-vue": "^10.9.1",

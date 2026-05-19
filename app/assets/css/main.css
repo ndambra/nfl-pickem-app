@@ -1,2 +1,48 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme static {
+  --color-primary-dark: #2b4ebf;
+  --color-secondary-dark: #2c196b;
+  --color-accent-dark: #492296;
+  --color-primary: #4062d4;
+  --color-secondary: #a794e6;
+  --color-accent: #9069dd;
+  --color-light: #e2e3e4;
+  --color-dark: #1b1c1d;
+  --color-black: #03040c;
+  --color-white: #f3f4fc;
+}
+
+:root {
+  --ui-container: var(--container-8xl);
+  --ui-primary: var(--color-primary);
+  --ui-secondary: var(--color-secondary);
+  --ui-success: var(--ui-color-success-500);
+  --ui-info: var(--color-accent);
+  --ui-warning: var(--ui-color-warning-500);
+  --ui-error: var(--ui-color-error-500);
+}
+
+.dark {
+  --ui-primary: var(--color-primary-dark);
+  --ui-secondary: var(--color-secondary-dark);
+  --ui-success: var(--ui-color-success-500);
+  --ui-info: var(--color-accent-dark);
+  --ui-warning: var(--ui-color-warning-500);
+  --ui-error: var(--ui-color-error-500);
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+/* html,
+body {
+  background-color: var(--color-light);
+  color: var(--color-black);
+}
+
+.dark body {
+  
+} */
