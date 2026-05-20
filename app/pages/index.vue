@@ -1,3 +1,5 @@
 <template>
-  <h1>Nfl Pickem</h1>
+  <v-container>
+    <h1>Main page</h1>
+  </v-container>
 </template>
