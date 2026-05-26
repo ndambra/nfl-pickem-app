@@ -30,7 +30,7 @@
               required
             />
 
-            <v-btn type="submit">Login</v-btn>
+            <v-btn type="submit" color="primary">Login</v-btn>
           </v-container>
         </v-form>
       </v-col>

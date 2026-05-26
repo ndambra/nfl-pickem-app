@@ -1,18 +1,17 @@
-// import { z } from "zod";
+import { z } from "zod";
 
-// const bodySchema = z.object({
-//   email: z.email(),
-//   password: z.string().min(8),
-// });
+const bodySchema = z.object({
+  email: z.email(),
+  password: z.string().min(8),
+});
 
 export default defineEventHandler(async (event) => {
-  // const { email, password } = await readValidatedBody(event, bodySchema.parse);
-
-  // TODO: remove once working, obviously for DEV work
+  const { email } = await readValidatedBody(event, bodySchema.parse);
 
   await setUserSession(event, {
     user: {
-      login: "name",
+      name: "name",
+      email,
     },
     secure: {
       apiToken: "1234567",
