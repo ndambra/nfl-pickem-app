@@ -1,9 +1,9 @@
 <template>
   <v-menu min-width="200px">
-    <template v-slot:activator="{ props }">
+    <template #activator="{ props }">
       <v-btn icon v-bind="props">
         <v-avatar color="primary-lighten-2">
-          <span class="text-headline-small">{{ user.initials }}</span>
+          <span class="text-headline-small">{{ user?.name[0] }}</span>
         </v-avatar>
       </v-btn>
     </template>
@@ -11,16 +11,16 @@
       <v-card-text>
         <div class="mx-auto text-center">
           <v-avatar color="primary-darken-2">
-            <span class="text-headline-small">{{ user.initials }}</span>
+            <span class="text-headline-small">{{ user?.name[0] }}</span>
           </v-avatar>
-          <h3 class="my-0">{{ user.fullname }}</h3>
+          <h3 class="my-0">{{ user?.login }}</h3>
           <p class="text-body-small mt-1">
-            {{ user.email }}
+            {{ user?.email }}
           </p>
-          <v-divider class="my-1"></v-divider>
+          <v-divider class="my-1" />
           <v-btn variant="text">Account Settings</v-btn>
-          <v-divider class="my-1"></v-divider>
-          <v-btn variant="text">Log out</v-btn>
+          <v-divider class="my-1" />
+          <v-btn variant="text" @click="logout">Log out</v-btn>
         </div>
       </v-card-text>
     </v-card>
@@ -28,7 +28,12 @@
 </template>
 
 <script lang="ts" setup>
-defineProps(["user"]);
+const { user, clear } = useUserSession();
+
+async function logout() {
+  await clear();
+  await navigateTo("/");
+}
 </script>
 
 <style></style>
