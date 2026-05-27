@@ -15,6 +15,13 @@
       "when": 1779822023685,
       "tag": "0001_needy_thena",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1779825489070,
+      "tag": "0002_tired_tarantula",
+      "breakpoints": true
     }
   ]
 }

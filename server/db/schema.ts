@@ -9,7 +9,7 @@ export const users = sqliteTable("user", {
   updatedAt: text("updated_at").notNull(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
-  password: text("password").notNull(),
+  password: text("password"),
 });
 
 export type User = typeof users.$inferSelect;
