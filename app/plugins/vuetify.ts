@@ -20,7 +20,7 @@ export default defineNuxtPlugin((app) => {
             surface: "#e2e3e4",
             primary: "#6002ee",
             "on-background": "#181818",
-            "on-primary": "#ececec",
+            "on-primary": "#e2e3e4",
             secondary: "#03dac5",
           },
         },
