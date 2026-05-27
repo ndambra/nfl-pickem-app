@@ -1,6 +1,6 @@
 <template>
   <v-app :theme="theme">
-    <app-nav-bar @change-theme="toggleTheme" :theme="theme" />
+    <app-nav-bar :theme="theme" @change-theme="toggleTheme" />
     <v-main>
       <slot />
     </v-main>
