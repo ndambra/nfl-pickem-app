@@ -1,6 +1,4 @@
-import { eq } from "drizzle-orm";
-import { db } from "~~/server/db";
-import { users } from "~~/server/db/schema";
+import { createUser, getUserByEmail } from "~~/server/db/queries/users";
 
 export default defineOAuthGitHubEventHandler({
   config: {
@@ -8,42 +6,24 @@ export default defineOAuthGitHubEventHandler({
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async onSuccess(event, { user, tokens }) {
-    if (!db) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: "Unable to connect to the database.",
-      });
-    }
-
     if (!user.email) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: "Github account must have an email set.",
-      });
+      throw new Error("Github account must have an email set.");
     }
 
-    let existingUser = await db.query.users.findFirst({
-      where: eq(users.email, user.email),
-    });
+    let existingUser = await getUserByEmail(user.email);
 
     if (!existingUser) {
-      const [result] = await db
-        .insert(users)
-        .values({
-          email: user.email,
-          name: user.name,
-          createdAt: Date.now().toLocaleString(),
-          updatedAt: Date.now().toLocaleString(),
-        })
-        .returning();
+      const result = await createUser({
+        email: user.email,
+        name: user.name,
+        createdAt: Date.now().toLocaleString(),
+        updatedAt: Date.now().toLocaleString(),
+      });
       existingUser = result;
     }
 
     if (!existingUser) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: "Error authenticating with Github",
-      });
+      throw new Error("Error authenticating with Github");
     }
 
     const { password, ...userWithoutPassword } = existingUser;

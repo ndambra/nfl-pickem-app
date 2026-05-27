@@ -13,7 +13,7 @@
       <v-btn
         color="primary-lighten-1"
         variant="flat"
-        @click="navigateTo('/login')"
+        @click="navigateTo('/register')"
         >Get Started</v-btn
       >
     </v-sheet>

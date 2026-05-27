@@ -1,12 +1,17 @@
 <template>
-  <v-container>
+  <v-container max-width="450">
     <v-row>
       <v-col>
-        <v-form validate-on="blur" @submit.prevent="login">
+        <v-form @submit.prevent="register">
           <v-container max-width="400">
             <v-text-field
+              v-model="credentials.name"
+              placeholder="Name"
+              required
+            />
+
+            <v-text-field
               v-model="credentials.email"
-              :rules="emailRules"
               placeholder="Email"
               type="email"
               required
@@ -14,14 +19,13 @@
 
             <v-text-field
               v-model="credentials.password"
-              :rules="passwordRules"
               placeholder="Password"
               type="password"
               required
             />
 
             <v-btn type="submit" color="primary" block class="mb-3"
-              >Login</v-btn
+              >Sign Up</v-btn
             >
             <v-divider :content-offset="[12, 2.5]" opacity=".7">or</v-divider>
             <v-btn
@@ -29,7 +33,7 @@
               block
               prepend-icon="mdi-github"
               @click="openInPopup('/api/auth/github')"
-              >Login with Github</v-btn
+              >Sign Up with Github</v-btn
             >
           </v-container>
         </v-form>
@@ -37,75 +41,45 @@
     </v-row>
     <v-row>
       <v-col class="text-center">
-        <v-btn variant="plain" to="/register">New user? Sign up!</v-btn>
+        <v-btn variant="plain" to="/login">Have an account? Login</v-btn>
       </v-col>
     </v-row>
-    <v-snackbar
-      v-model="showToast"
-      location="bottom"
-      :color="toastColor"
-      :timeout="3000"
-      >{{ toastMsg }}</v-snackbar
-    >
+    <v-snackbar v-model="showToast" location="bottom" :timeout="3000">{{
+      toastMsg
+    }}</v-snackbar>
   </v-container>
 </template>
 
 <script lang="ts" setup>
-import { FetchError } from "ofetch";
-
 const { loggedIn, fetch: refreshSession, openInPopup } = useUserSession();
-
 const showToast = ref(false);
 const toastMsg = ref("");
 const toastColor = ref("primary");
 
-const emailRules = [
-  (value: string) => {
-    if (value) return true;
-
-    return "E-mail is required.";
-  },
-  (value: string) => {
-    if (/.+@.+\..+/.test(value)) return true;
-
-    return "E-mail must be valid.";
-  },
-];
-
-const passwordRules = [
-  (value: string) => {
-    if (value) return true;
-
-    return "Password is required.";
-  },
-];
-
 const credentials = reactive({
   email: "",
   password: "",
+  name: "",
 });
 
 watch(loggedIn, () => {
   if (loggedIn.value) navigateTo("/dashboard");
 });
 
-async function login() {
+async function register() {
   try {
-    await $fetch("/api/auth/login", {
+    await $fetch("/api/auth/register", {
       method: "POST",
       body: credentials,
     });
-    await refreshSession();
-    await navigateTo("/dashboard");
-  } catch (error) {
+    refreshSession();
+    toastMsg.value = "User registered";
+    toastColor.value = "success";
+  } catch {
+    toastMsg.value = "Registration failed.";
     toastColor.value = "error";
-    if (error instanceof FetchError) {
-      toastMsg.value = "Invalid email or password.";
-    } else {
-      toastMsg.value = "Error logging in. Try again later.";
-    }
-    showToast.value = true;
   }
+  showToast.value = true;
 }
 </script>
 
