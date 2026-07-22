@@ -40,13 +40,7 @@
         <v-btn variant="plain" to="/register">New user? Sign up!</v-btn>
       </v-col>
     </v-row>
-    <v-snackbar
-      v-model="showToast"
-      location="bottom"
-      :color="toastColor"
-      :timeout="3000"
-      >{{ toastMsg }}</v-snackbar
-    >
+    <app-toast v-model="showToast" :toast-msg="toastMsg" :color="toastColor" />
   </v-container>
 </template>
 

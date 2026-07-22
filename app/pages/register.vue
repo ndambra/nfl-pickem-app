@@ -44,9 +44,7 @@
         <v-btn variant="plain" to="/login">Have an account? Login</v-btn>
       </v-col>
     </v-row>
-    <v-snackbar v-model="showToast" location="bottom" :timeout="3000">{{
-      toastMsg
-    }}</v-snackbar>
+    <app-toast v-model="showToast" :toast-msg="toastMsg" :color="toastColor" />
   </v-container>
 </template>
 

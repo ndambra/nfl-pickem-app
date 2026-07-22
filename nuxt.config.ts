@@ -15,7 +15,14 @@ export default defineNuxtConfig({
       },
     },
     optimizeDeps: {
-      include: ["@vue/devtools-core", "@vue/devtools-kit"],
+      include: [
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "dotenv", // CJS
+        "drizzle-orm",
+        "drizzle-orm/libsql",
+        "drizzle-orm/sqlite-core",
+      ],
     },
   },
 });

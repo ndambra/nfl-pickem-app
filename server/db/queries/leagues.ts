@@ -13,3 +13,13 @@ export async function getLeaguesForUser(userId: string) {
   assertDbConnection();
   return await db!.select().from(leagues).where(eq(leagues.ownerId, userId));
 }
+
+export async function getLeagueByName(leagueName: string) {
+  assertDbConnection();
+  const [result] = await db!
+    .select()
+    .from(leagues)
+    .where(eq(leagues.name, leagueName));
+
+  return result;
+}
