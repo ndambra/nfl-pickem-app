@@ -7,7 +7,7 @@
           <v-card-title class="text-headline-medium">My Leagues</v-card-title>
           <v-card-text>
             <v-divider />
-            <v-list v-if="leagues">
+            <v-list v-if="leagues && leagues.length > 0">
               <template v-for="(league, index) in leagues" :key="league.id">
                 <v-list-item>
                   <v-list-item-title class="text-title-small">{{
@@ -53,10 +53,13 @@ definePageMeta({
 const { data: leagues } = await useFetch(`/api/leagues/${user.value?.id}`);
 
 function viewLeague(leagueId: string) {
+  // TODO: implement viewing leagues
   console.log(`View league: ${leagueId}`);
 }
 
-function createLeague() {}
+function createLeague() {
+  // TODO: implement league creationg
+}
 </script>
 
 <style></style>
