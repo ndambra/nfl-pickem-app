@@ -13,7 +13,7 @@
           <v-avatar color="primary-darken-2">
             <span class="text-headline-small">{{ user?.name[0] }}</span>
           </v-avatar>
-          <h3 class="my-0">{{ user?.login }}</h3>
+          <h3 class="my-0">{{ user?.name }}</h3>
           <p class="text-body-small mt-1">
             {{ user?.email }}
           </p>
